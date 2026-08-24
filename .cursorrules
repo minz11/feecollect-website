@@ -1,0 +1,35 @@
+# FeeCollect.io AI System Guardrails & Prompt Rules
+
+## Context Rule
+ALWAYS inspect `@docs/01_Brand_Design_Guide.md` and `@docs/02_Website_Guidelines.md` before generating or modifying any UI component or section.
+
+## Design Aesthetic & Positioning
+- **Vibe:** Modern, Enterprise, Calm, Reliable, Minimal, Connected (Stripe, Linear, Vercel standard).
+- **Positioning:** "One Platform. Every Institution." / "Everything Works Together."
+- **Layout System:** Strict 8-point spatial grid (`8px`, `16px`, `24px`, `32px`, `48px`, `64px`).
+
+## Color Distribution Rules
+- **Website Surface:** 75% White (`#FFFFFF`), 20% Neutral (`#1A1A1A`), 5% Brand Yellow (`#FFAB00`).
+- **Brand Signature Accent:** `#FFAB00`.
+- **Accent Restrictions:** Brand Yellow is strictly reserved for:
+  1. Logo Mark
+  2. Primary CTAs
+  3. Active Navigation States
+  4. Focus Ring States
+  5. Progress Indicators / Key Highlights
+- **NO INLINE HEX CODES:** Always use Tailwind tokens defined in `tailwind.config.js` (e.g., `bg-brand-yellow`, `text-brand-neutral`). Never hardcode hex values.
+
+## Typography
+- **Primary Typeface:** `Inter` exclusively across all surfaces.
+
+## Negative Constraints (STRICTLY BANNED)
+- NO traditional school ERP aesthetics or playful visual tropes.
+- NO cartoon illustrations, graduation caps, books, or generic stock graphics.
+- NO glassmorphism, heavy gradients, or decorative background blobs.
+- NO excessive color usage. Maintain white-dominant calm surfaces.
+- NO KPI cards on ERP master screens.
+
+## Component Principles
+- Reuse existing `shadcn/ui` primitives. Never duplicate UI structures.
+- Forms must use `react-hook-form` with `zod` schema validation.
+- All data tables must support search, sort, filter, pagination, export, and sticky headers.

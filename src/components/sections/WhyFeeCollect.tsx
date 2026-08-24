@@ -43,7 +43,7 @@ export const WhyFeeCollect = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-4">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-glass transition-all hover:bg-amber-100/80">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm transition-all hover:bg-amber-100/80">
             <CheckCircle2 className="w-3.5 h-3.5 text-amber-600 shrink-0" />
             WHY FEECOLLECT
           </span>
@@ -67,7 +67,7 @@ export const WhyFeeCollect = () => {
               className="glass-card p-6"
             >
               <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-100 to-yellow-50 text-amber-600 ring-1 ring-amber-500/20 shadow-glass">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-100 to-yellow-50 text-amber-600 ring-1 ring-amber-500/20 shadow-sm">
                   <item.icon className="w-6 h-6" />
                 </div>
                 <div>
@@ -79,7 +79,7 @@ export const WhyFeeCollect = () => {
           ))}
         </div>
 
-        <div className="mt-8 rounded-[28px] border border-amber-500/20 bg-gradient-to-br from-amber-50 to-yellow-50 p-8 md:p-12 shadow-glass-hover">
+        <div className="mt-8 rounded-[28px] border border-amber-500/20 bg-gradient-to-br from-amber-50 to-yellow-50 p-8 md:p-12 shadow-soft">
           <div className="max-w-3xl mx-auto text-center space-y-4">
             <p className="text-sm font-bold text-gradient-gold uppercase tracking-widest">Trusted by institutions nationwide</p>
             <h3 className="text-2xl sm:text-3xl font-bold text-brand-neutral-900">
@@ -90,7 +90,7 @@ export const WhyFeeCollect = () => {
             </p>
             <a
               href="mailto:hello@feecollect.io"
-              className="mt-4 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 bg-[length:200%_auto] px-7 py-3.5 text-sm font-bold text-slate-950 shadow-yellow-glow transition-all duration-300 hover:bg-right hover:shadow-yellow-glow"
+              className="mt-4 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 bg-[length:200%_auto] px-7 py-3.5 text-sm font-bold text-slate-950 shadow-[0_10px_30px_-8px_rgba(245,158,11,0.6)] transition-all duration-300 hover:bg-right hover:shadow-[0_14px_40px_-8px_rgba(245,158,11,0.75)]"
             >
               Start a Conversation
             </a>

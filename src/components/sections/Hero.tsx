@@ -17,9 +17,9 @@ export const Hero: FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45 }}
-            className="lg:col-span-7 relative overflow-hidden rounded-organic-1 p-6 lg:p-8 shadow-glass"
+            className="lg:col-span-7 relative overflow-hidden rounded-3xl p-6 lg:p-8"
           >
-<span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-neutral-50 border border-brand-neutral-200/80 text-brand-yellow text-xs font-bold tracking-widest uppercase mb-4 shadow-glass transition-all hover:bg-brand-neutral-100/80">
+<span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-neutral-50 border border-brand-neutral-200/80 text-brand-yellow text-xs font-bold tracking-widest uppercase mb-4 shadow-sm transition-all hover:bg-brand-neutral-100/80">
               <Zap className="w-3.5 h-3.5 text-brand-yellow shrink-0" />
               THE CAMPUS OS
             </span>
@@ -123,7 +123,7 @@ export const Hero: FC = () => {
               </div>
 
               {/* Center: main admin dashboard */}
-              <div className="relative z-30 w-[88%] rounded-organic-2 bg-white border border-brand-neutral-200/90 shadow-glass-hover overflow-hidden transition-all duration-300 hover:scale-[1.02]">
+              <div className="relative z-30 w-[88%] rounded-2xl bg-white border border-brand-neutral-200/90 shadow-soft overflow-hidden transition-all duration-300 hover:scale-[1.02]">
                 <img
                   src="/erp/admin-dashboard.png"
                   alt="Main ERP Admin Dashboard"
@@ -132,7 +132,7 @@ export const Hero: FC = () => {
               </div>
 
               {/* Top-right: student invoices & finance ledger */}
-              <div className="absolute -top-6 -right-6 z-10 w-[52%] rounded-organic-3 bg-white border border-brand-neutral-200/80 shadow-glass overflow-hidden opacity-95 transition-all duration-300 hover:z-40 hover:opacity-100 hover:scale-105">
+              <div className="absolute -top-6 -right-6 z-10 w-[52%] rounded-xl bg-white border border-brand-neutral-200/80 shadow-soft overflow-hidden opacity-95 transition-all duration-300 hover:z-40 hover:opacity-100 hover:scale-105">
                 <img
                   src="/erp/fees-invoices.png"
                   alt="Student Fees and Invoices Ledger"
@@ -141,7 +141,7 @@ export const Hero: FC = () => {
               </div>
 
               {/* Bottom-left: curriculum & academic planner */}
-              <div className="absolute -bottom-8 -left-8 z-20 w-[50%] rounded-organic-4 bg-white border border-brand-neutral-200/80 shadow-glass overflow-hidden opacity-95 transition-all duration-300 hover:z-40 hover:opacity-100 hover:scale-105">
+              <div className="absolute -bottom-8 -left-8 z-20 w-[50%] rounded-xl bg-white border border-brand-neutral-200/80 shadow-soft overflow-hidden opacity-95 transition-all duration-300 hover:z-40 hover:opacity-100 hover:scale-105">
                 <img
                   src="/erp/curriculum-planner.png"
                   alt="Curriculum & Syllabus Planner"
@@ -150,7 +150,7 @@ export const Hero: FC = () => {
               </div>
 
               {/* Bottom-right: hostel & room allotment */}
-              <div className="absolute -bottom-10 -right-4 z-20 w-[48%] rounded-organic-1 bg-white border border-brand-neutral-200/80 shadow-glass overflow-hidden opacity-95 transition-all duration-300 hover:z-40 hover:opacity-100 hover:scale-105">
+              <div className="absolute -bottom-10 -right-4 z-20 w-[48%] rounded-xl bg-white border border-brand-neutral-200/80 shadow-soft overflow-hidden opacity-95 transition-all duration-300 hover:z-40 hover:opacity-100 hover:scale-105">
                 <img
                   src="/erp/hostel-allotment.png"
                   alt="Hostel Room & Bed Allotment"

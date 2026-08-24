@@ -11,7 +11,7 @@ const channels = [
   {
     icon: Phone,
     title: 'Phone & WhatsApp',
-    lines: ['+1 (800) 555-0199', 'Mon–Sat, 9am–9pm EST'],
+    lines: ['+1 (800) 555-0199', 'Mon\u2013Sat, 9am\u20139pm EST'],
   },
   {
     icon: MapPin,
@@ -45,7 +45,7 @@ export const Contact = () => {
 
       <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-12">
         <div className="text-center mx-auto space-y-4 mb-12 max-w-2xl">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-glass transition-all hover:bg-amber-100/80">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm transition-all hover:bg-amber-100/80">
             <PhoneCall className="w-3.5 h-3.5 text-amber-600 shrink-0" />
             CONTACT US
           </span>
@@ -64,7 +64,7 @@ export const Contact = () => {
             {channels.map(({ icon: Icon, title, lines }) => (
               <div
                 key={title}
-                className="flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-6 shadow-glass transition-all duration-300 hover:border-amber-400 hover:shadow-glass-hover"
+                className="flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-amber-400 hover:shadow-soft"
               >
                 <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 ring-1 ring-amber-200/80">
                   <Icon className="h-5 w-5" />
@@ -83,13 +83,13 @@ export const Contact = () => {
             <div className="flex items-center gap-3 rounded-2xl border border-emerald-200/80 bg-emerald-50/70 px-6 py-5">
               <MessageSquare className="h-5 w-5 shrink-0 text-emerald-600" />
               <p className="text-sm font-semibold text-emerald-900">
-                Live Chat Available <span className="text-emerald-700">🟢 Response time: &lt; 15 mins</span>
+                Live Chat Available <span className="text-emerald-700">🟢 Response time: less than 15 mins</span>
               </p>
             </div>
           </div>
 
           {/* Right: quick contact form */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-glass-hover">
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-soft">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
@@ -117,9 +117,9 @@ export const Contact = () => {
                 <label htmlFor="size" className="mb-1.5 block text-sm font-semibold text-gray-700">Institution Size</label>
                 <select id="size" name="size" required defaultValue="" className={inputClass}>
                   <option value="" disabled>Select student count</option>
-                  <option value="<1k">&lt;1k students</option>
-                  <option value="1k-5k">1k–5k students</option>
-                  <option value="5k-20k">5k–20k students</option>
+                  <option value="lt1k">\u003C1k students</option>
+                  <option value="1k-5k">1k\u20135k students</option>
+                  <option value="5k-20k">5k\u201320k students</option>
                   <option value="20k+">20k+ students</option>
                 </select>
               </div>
@@ -131,7 +131,7 @@ export const Contact = () => {
 
               <button
                 type="submit"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 bg-[length:200%_auto] px-6 py-4 text-sm font-bold text-slate-950 shadow-yellow-glow transition-all duration-300 hover:bg-right hover:shadow-yellow-glow"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 bg-[length:200%_auto] px-6 py-4 text-sm font-bold text-slate-950 shadow-[0_10px_30px_-8px_rgba(245,158,11,0.6)] transition-all duration-300 hover:bg-right hover:shadow-[0_14px_40px_-8px_rgba(245,158,11,0.75)]"
               >
                 Submit Request
               </button>

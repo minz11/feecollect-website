@@ -41,7 +41,7 @@ export const ProductShowcase = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-10">
         <div className="text-center max-w-2xl mx-auto space-y-4">
-<span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-neutral-50 border border-brand-neutral-200/80 text-brand-yellow text-xs font-bold tracking-widest uppercase mb-4 shadow-glass transition-all hover:bg-brand-neutral-100/80">
+<span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-neutral-50 border border-brand-neutral-200/80 text-brand-yellow text-xs font-bold tracking-widest uppercase mb-4 shadow-sm transition-all hover:bg-brand-neutral-100/80">
               <MonitorPlay className="w-3.5 h-3.5 text-brand-yellow shrink-0" />
               PLATFORM IN ACTION
           </span>
@@ -55,7 +55,7 @@ export const ProductShowcase = () => {
         </div>
 
         {/* Main Showcase Display */}
-        <div className="relative w-full aspect-[16/9] max-h-[550px] bg-brand-neutral-900/5 rounded-2xl border-2 border-brand-neutral-200/80 shadow-glass-hover overflow-hidden flex items-center justify-center">
+        <div className="relative w-full aspect-[16/9] max-h-[550px] bg-brand-neutral-900/5 rounded-2xl border-2 border-brand-neutral-200/80 shadow-soft overflow-hidden flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.img
               id="active-showcase-img"
@@ -96,7 +96,7 @@ export const ProductShowcase = () => {
                 aria-pressed={isActive}
                 className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
                   isActive
-                    ? 'bg-brand-yellow text-brand-neutral-900 shadow-yellow-glow'
+                    ? 'bg-brand-yellow text-brand-neutral-900 shadow-md'
                     : 'bg-brand-neutral-100 text-brand-neutral-700 border border-brand-neutral-200 hover:border-brand-yellow/50'
                 }`}
               >

@@ -131,7 +131,7 @@ export const PlatformModules = () => {
       <AtmosphericLighting variant="modules" />
       <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-12">
         <div className="text-center mx-auto space-y-3 mb-10 max-w-2xl">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-glass transition-all hover:bg-amber-100/80">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm transition-all hover:bg-amber-100/80">
             <Layers className="w-3.5 h-3.5 text-amber-600 shrink-0" />
             CORE MODULES
           </span>
@@ -167,7 +167,7 @@ export const PlatformModules = () => {
                       <span
                         className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-200 ${
                           isActive
-                            ? 'bg-gradient-to-br from-amber-500 to-yellow-400 text-white shadow-yellow-glow'
+                            ? 'bg-gradient-to-br from-amber-500 to-yellow-400 text-white shadow-[0_8px_16px_-6px_rgba(245,158,11,0.7)]'
                             : 'bg-slate-100 text-slate-600 group-hover:bg-amber-50 group-hover:text-amber-600'
                         }`}
                       >
@@ -189,7 +189,7 @@ export const PlatformModules = () => {
 
           {/* Right: single preview card */}
           <div className="md:col-span-8">
-            <div className="bg-white border border-brand-neutral-200 rounded-organic-2 p-8 shadow-glass-hover max-h-[500px] overflow-hidden">
+            <div className="bg-white border border-brand-neutral-200 rounded-2xl p-8 shadow-soft max-h-[500px] overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active.id}
@@ -199,7 +199,7 @@ export const PlatformModules = () => {
                   transition={{ duration: 0.25, ease: 'easeOut' }}
                 >
                   <div className="flex items-center gap-4">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-400 text-white shadow-yellow-glow">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-400 text-white shadow-[0_10px_20px_-8px_rgba(245,158,11,0.8)]">
                       <active.icon className="h-6 w-6" />
                     </span>
                     <div>

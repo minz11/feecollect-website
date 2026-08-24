@@ -43,7 +43,7 @@ export const FAQ = () => {
       <AtmosphericLighting variant="faq" />
       <div className="relative z-10 w-full max-w-4xl mx-auto px-6 py-12">
         <div className="text-center mx-auto space-y-3 mb-10 max-w-2xl">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-glass transition-all hover:bg-amber-100/80">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm transition-all hover:bg-amber-100/80">
             <HelpCircle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
             FAQ
           </span>
@@ -62,7 +62,7 @@ export const FAQ = () => {
             return (
               <div
                 key={idx}
-                className={`bg-white border rounded-xl shadow-glass transition-all duration-200 ${
+                className={`bg-white border rounded-xl shadow-sm transition-all duration-200 ${
                   isOpen ? 'border-amber-400' : 'border-gray-200 hover:border-amber-400'
                 }`}
               >

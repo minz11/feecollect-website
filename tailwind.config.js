@@ -87,39 +87,19 @@ module.exports = {
         '3xl': "2rem",
         '4xl': "3rem",
         '6xl': "24px",
-        'organic-1': "60% 40% 30% 70% / 60% 30% 70% 40%",
-        'organic-2': "70% 30% 70% 30% / 30% 70% 30% 70%",
-        'organic-3': "40% 60% 40% 60% / 50% 40% 60% 50%",
-        'organic-4': "50% 50% 30% 70% / 40% 60% 50% 50%",
     },
     boxShadow: {
         soft: "0 24px 60px -30px rgba(10, 10, 10, 0.15)",
         card: "0 20px 40px -24px rgba(10, 10, 10, 0.12)",
         'card-hover': "0 24px 70px rgba(15,23,42,0.08)",
         'yellow-glow': "0 35px 80px rgba(255,171,0,.18)",
-        'glass': "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
-        'glass-hover': "0 12px 40px 0 rgba(31, 38, 135, 0.5)",
-        'neumorphism': "20px 20px 60px #d1d9e6, -20px -20px 60px #ffffff",
-        'neumorphism-pressed': "inset 20px 20px 60px #d1d9e6, inset -20px -20px 60px #ffffff",
-        'brutalist': "8px 8px 0 0 #000",
-        'brutalist-hover': "12px 12px 0 0 #000",
-        'inner-glow': "inset 0 0 60px rgba(255, 171, 0, 0.1)",
     },
-      backdropBlur: {
-        'xs': '2px',
-        'glass': '20px',
-      },
-      backgroundImage: {
-        'gradient-mesh': 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.3), transparent), radial-gradient(ellipse 60% 40% at 100% 100%, rgba(236, 72, 153, 0.2), transparent), radial-gradient(ellipse 70% 50% at 0% 0%, rgba(59, 130, 246, 0.2), transparent)',
-        'aurora-gradient': 'linear-gradient(115deg, rgba(139, 92, 246, 0.4) 0%, rgba(236, 72, 153, 0.3) 25%, rgba(59, 130, 246, 0.3) 50%, rgba(16, 185, 129, 0.3) 75%, rgba(245, 158, 11, 0.4) 100%)',
-        'shimmer-gradient': 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
-        'noise': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
-      },
       keyframes: {
         "fade-in": {
           "0%": { opacity: "0", transform: "translateY(6px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -128,42 +108,11 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "blob": {
-          "0%": { transform: "translate(0px, 0px) scale(1)" },
-          "33%": { transform: "translate(30px, -50px) scale(1.1)" },
-          "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
-          "100%": { transform: "translate(0px, 0px) scale(1)" },
-        },
-        "aurora": {
-          "0%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
-          "100%": { backgroundPosition: "0% 50%" },
-        },
-        "float": {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-20px)" },
-        },
-        "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px rgba(255, 171, 0, 0.3)" },
-          "50%": { boxShadow: "0 0 40px rgba(255, 171, 0, 0.6)" },
-        },
-        "shimmer": {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
       },
       animation: {
         "fade-in": "fade-in 0.3s ease-out forwards",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "blob": "blob 7s infinite",
-        "aurora": "aurora 60s linear infinite",
-        "float": "float 6s ease-in-out infinite",
-        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "shimmer": "shimmer 2s linear infinite",
-      },
-      backgroundSize: {
-        "300%": "300% 300%",
       },
     },
   },

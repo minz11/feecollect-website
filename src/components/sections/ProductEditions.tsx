@@ -83,7 +83,7 @@ export const ProductEditions = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 space-y-12">
         <div className="text-center max-w-3xl mx-auto space-y-5">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-glass transition-all hover:bg-amber-100/80">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm transition-all hover:bg-amber-100/80">
             <CreditCard className="w-3.5 h-3.5 text-amber-600 shrink-0" />
             TRANSPARENT PRICING
           </span>
@@ -96,9 +96,9 @@ export const ProductEditions = () => {
           </p>
 
           <div className="mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <div className="relative w-full sm:w-56 rounded-full border border-amber-500/20 bg-white/80 p-1 shadow-glass backdrop-blur-xl">
+            <div className="relative w-full sm:w-56 rounded-full border border-amber-500/20 bg-white/80 p-1 shadow-[0_8px_24px_-8px_rgba(245,158,11,0.25)] backdrop-blur-xl">
               <motion.div
-                className="absolute top-1 left-1 h-8 w-1/2 rounded-full bg-gradient-to-r from-amber-500 to-yellow-400 shadow-yellow-glow"
+                className="absolute top-1 left-1 h-8 w-1/2 rounded-full bg-gradient-to-r from-amber-500 to-yellow-400 shadow-[0_4px_14px_-4px_rgba(245,158,11,0.7)]"
                 animate={{ x: billingCycle === 'Annual' ? '100%' : '0%' }}
                 transition={{ type: 'spring', stiffness: 320, damping: 28 }}
                 aria-hidden
@@ -137,10 +137,10 @@ export const ProductEditions = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.08 }}
-                className="flex flex-col justify-between h-full p-8 bg-white rounded-2xl border border-gray-200 shadow-glass-hover relative transition-all duration-300 hover:-translate-y-2 hover:border-amber-400 cursor-pointer"
+                className="flex flex-col justify-between h-full p-8 bg-white rounded-2xl border border-gray-200 shadow-sm relative transition-all duration-300 hover:-translate-y-2 hover:border-amber-400 cursor-pointer"
               >
                 {isFeatured && (
-                  <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-500/10 via-transparent to-yellow-400/10" />
+                  <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_top,rgba(255,171,0,0.14),transparent_55%)]" />
                 )}
 
                 <div className="relative flex flex-1 flex-col">
@@ -190,9 +190,9 @@ export const ProductEditions = () => {
                       type="button"
                       className={`inline-flex w-full items-center justify-center rounded-2xl px-5 py-3 text-sm font-bold transition ${
                         tier.ctaStyle === 'primary'
-                          ? 'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 bg-[length:200%_auto] text-slate-950 shadow-yellow-glow transition-all duration-300 hover:bg-right hover:shadow-yellow-glow'
+                          ? 'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 bg-[length:200%_auto] text-slate-950 shadow-md shadow-amber-500/25 transition-all duration-300 hover:bg-right hover:shadow-[0_14px_36px_-10px_rgba(245,158,11,0.75)]'
                           : tier.ctaStyle === 'dark'
-                          ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-glass-hover'
+                          ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-[0_10px_30px_-10px_rgba(15,23,42,0.5)]'
                           : 'border border-slate-900/20 bg-white/80 text-slate-900 hover:border-amber-400/50 hover:bg-amber-50/60'
                       }`}
                     >

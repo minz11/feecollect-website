@@ -44,7 +44,7 @@ export const Implementation = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-12">
 
         <div className="text-center max-w-2xl mx-auto space-y-4">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-glass transition-all hover:bg-amber-100/80">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm transition-all hover:bg-amber-100/80">
             <Compass className="w-3.5 h-3.5 text-amber-600 shrink-0" />
             IMPLEMENTATION JOURNEY
           </span>
@@ -68,7 +68,7 @@ export const Implementation = () => {
               className="glass-card p-6"
             >
               <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-100 to-yellow-50 text-amber-600 ring-1 ring-amber-500/20 shadow-glass">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-100 to-yellow-50 text-amber-600 ring-1 ring-amber-500/20 shadow-sm">
                   <step.icon className="w-6 h-6" />
                 </div>
                 <div>

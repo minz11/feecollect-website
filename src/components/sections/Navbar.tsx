@@ -16,7 +16,7 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header aria-label="Main navigation" className="sticky top-0 z-50 bg-white/80 backdrop-blur-2xl border-b border-brand-neutral-200/60 shadow-glass">
+    <header aria-label="Main navigation" className="sticky top-0 z-50 bg-white/80 backdrop-blur-2xl border-b border-brand-neutral-200/60 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.08)]">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <img src="/logo.png" alt="FeeCollect Logo" className="h-8 w-auto" />

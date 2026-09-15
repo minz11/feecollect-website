@@ -1,6 +1,49 @@
 /** @type {import('tailwindcss').Config} */
+const brand = {
+  blue: {
+    50: "#EFF6FF",
+    100: "#BFDBFE",
+    200: "#93C5FD",
+    300: "#60A5FA",
+    400: "#3B82F6",
+    500: "#2563EB",
+    600: "#1D4ED8",
+    700: "#1E40AF",
+    800: "#1E3A82",
+    900: "#1E3A82",
+    950: "#172554",
+  },
+  yellow: {
+    DEFAULT: "#FFAB00",
+    hover: "#E69A00",
+    light: "rgba(255, 171, 0, 0.1)",
+    glow: "rgba(255, 171, 0, 0.15)",
+    text: "#CC8800",
+    "gold-light": "#FFC34D",
+  },
+  traffic: {
+    red: "#FF5F56",
+    yellow: "#FFBD2E",
+    green: "#27C93F",
+  },
+  neutral: {
+    950: "#172554",
+    900: "#1E293B",
+    800: "#1E293B",
+    700: "#334155",
+    600: "#475569",
+    500: "#64748B",
+    400: "#94A3B8",
+    300: "#CBD5E1",
+    200: "#E2E8F0",
+    100: "#F1F5F9",
+    50: "#F8FAFC",
+    25: "#F8FAFC",
+  },
+  white: "#FFFFFF",
+};
+
 module.exports = {
-  darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -8,113 +51,146 @@ module.exports = {
     './src/**/*.{ts,tsx}',
   ],
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
       colors: {
-        brand: {
-          // Signature Accent (5% Website / 3% ERP)
-          yellow: {
-            DEFAULT: "#FFAB00",
-            hover: "#E69A00",
-            light: "rgba(255, 171, 0, 0.1)",
-            glow: "rgba(255, 171, 0, 0.15)",
-          },
-          // Dominant Background (75% Website / 82% ERP)
-          white: "#FFFFFF",
-          // Dark Neutrals & Surfaces (20% Website / 15% ERP)
-          neutral: {
-            950: "#030303",
-            900: "#0A0A0A", // Main High-Contrast Text
-            800: "#1A1A1A", // Primary Dark Neutral Surface
-            700: "#2A2A2A", // Secondary Dark Surface
-            600: "#404040", // Muted Text
-            500: "#666666", // Placeholder / Subtitles
-            400: "#A3A3A3", // Disabled States
-            300: "#D4D4D4", // Secondary Borders
-            200: "#E5E5E5", // Primary Borders & Dividers
-            100: "#F5F5F5", // Secondary Backgrounds
-            50: "#FAFAFA",  // Soft Card Fill
-            25: "#FBFBFB",
-          },
-        },
-        },
-        backgroundColor: {
-          'hero': '#FFFFFF',
-          'transformation': '#FFFDF8',
-          'core-modules': '#FAFBFC',
-          'platform-action': '#FFFFFF',
-          'pricing': '#FFFDF8',
-          'implementation': '#FAFBFC',
-          'faq': '#FFFFFF',
-          'contact': '#FFF8EA',
-          'footer': '#F8F9FB',
-        },
-        borderColor: {
-          brand: {
-            'neutral-50': '#FAFAFA',
-            'neutral-100': '#F5F5F5',
-            'neutral-200': '#E5E5E5',
-            'neutral-300': '#D4D4D4',
-            'neutral-400': '#A3A3A3',
-            'neutral-500': '#666666',
-            'neutral-600': '#404040',
-            'neutral-700': '#2A2A2A',
-            'neutral-800': '#1A1A1A',
-            'neutral-900': '#0A0A0A',
-          },
-        },
-        fontFamily: {
-          sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
-        },
-      spacing: {
-        '18': '4.5rem',
-        '22': '5.5rem',
-        '128': '32rem',
-        '144': '36rem',
+        brand,
+        white: "#FFFFFF",
+        primary: { ...brand.blue },
+        accent: { ...brand.yellow },
+        surface: { DEFAULT: "#FFFFFF", hover: "#F8FAFC" },
+        background: { DEFAULT: "#F8FAFC", muted: "#F1F5F9" },
+        text: { DEFAULT: "#1E293B", muted: "#64748B", inverse: "#F8FAFC" },
+        border: { DEFAULT: "#E2E8F0", input: "#CBD5E1" },
+        // Status colors — namespaced to avoid colliding with brand.*
+        success: { DEFAULT: "#10B981", light: "#DCFCE7" },
+        warning: { DEFAULT: "#F59E0B", light: "#FFFBEB" },
+        danger: { DEFAULT: "#EF4444", light: "#FEE2E2" },
+        info: { DEFAULT: "#3B82F6", light: "#BFDBFE" },
       },
-    borderRadius: {
+      backgroundColor: {
+        hero: "#FFFFFF",
+        transformation: "#FFFDF8",
+        "core-modules": "#FAFBFC",
+        "platform-action": "#F8FAFC",
+        pricing: "#FAFBFC",
+        implementation: "#FFFFFF",
+        faq: "#FAFBFC",
+        contact: "#FFF8EA",
+        footer: "#F8F9FB",
+        enterprise: "#0F172A",
+        subtle: "#F8FAFC",
+        accent: "#FFFDF8",
+        warm: "#FFF8EA",
+      },
+      borderColor: {
+        brand: {
+          "neutral-50": "#F8FAFC",
+          "neutral-100": "#F1F5F9",
+          "neutral-200": "#E2E8F0",
+          "neutral-300": "#CBD5E1",
+          "neutral-400": "#94A3B8",
+          "neutral-500": "#64748B",
+          "neutral-600": "#475569",
+          "neutral-700": "#334155",
+          "neutral-800": "#1E293B",
+          "neutral-900": "#0F172A",
+        },
+      },
+      fontFamily: {
+        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+      },
+      container: {
+        center: true,
+        padding: "2rem",
+        screens: {
+          "2xl": "1400px",
+        },
+      },
+      height: {
+        13: "52px",
+        14: "56px",
+      },
+      borderRadius: {
+        // MRS-aligned: 8px sm / 12px md / 20px lg
+        sm: "8px",
+        md: "12px",
+        lg: "20px",
         xl: "1.5rem",
-        lg: "0.5rem",
-        md: "0.375rem",
-        sm: "0.25rem",
-        '2xl': "1.75rem",
-        '3xl': "2rem",
-        '4xl': "3rem",
-        '6xl': "24px",
-    },
-    boxShadow: {
-        soft: "0 24px 60px -30px rgba(10, 10, 10, 0.15)",
-        card: "0 20px 40px -24px rgba(10, 10, 10, 0.12)",
+        md2: "0.5rem",
+      },
+      fontSize: {
+        // Display hierarchy (MRS TYPO-002)
+        'display-xl': ["4.5rem", { lineHeight: "1.05", letterSpacing: "-0.02em", fontWeight: "800" }],
+        'display-l': ["3.5rem", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "800" }],
+        h1: ["2.5rem", { lineHeight: "1.2", fontWeight: "700" }],
+        h2: ["1.875rem", { lineHeight: "1.25", fontWeight: "700" }],
+        h3: ["1.5rem", { lineHeight: "1.3", fontWeight: "600" }],
+        h4: ["1.25rem", { lineHeight: "1.4", fontWeight: "600" }],
+        'body-l': ["1.125rem", { lineHeight: "1.6", fontWeight: "400" }],
+        body: ["1rem", { lineHeight: "1.6", fontWeight: "400" }],
+        small: ["0.875rem", { lineHeight: "1.5", fontWeight: "400" }],
+        caption: ["0.75rem", { lineHeight: "1.5", fontWeight: "500" }],
+        'text-section-title': ["42px", { lineHeight: "1.2", fontWeight: "700" }],
+        'text-micro': ["11px", { lineHeight: "1", fontWeight: "600", letterSpacing: "0.1em" }],
+        // Subutility classes (not <p> defaults)
+        'text-xs': ["0.75rem", { lineHeight: "1", fontWeight: "500", letterSpacing: "0.1em" }],
+        'text-sm': ["0.875rem", { lineHeight: "1.25", fontWeight: "500" }],
+        'text-base': ["1rem", { lineHeight: "1.6", fontWeight: "400" }],
+        'text-lg': ["1.125rem", { lineHeight: "1.6", fontWeight: "400" }],
+        'text-xl': ["1.25rem", { lineHeight: "1.6", fontWeight: "600" }],
+        'text-2xl': ["1.5rem", { lineHeight: "1.5", fontWeight: "600" }],
+        'text-3xl': ["1.875rem", { lineHeight: "1.5", fontWeight: "700" }],
+        'text-4xl': ["2.25rem", { lineHeight: "1.4", fontWeight: "700" }],
+        'text-5xl': ["3rem", { lineHeight: "1.3", fontWeight: "800" }],
+      },
+      boxShadow: {
+        // Navy-tinted — matches logo dropShadow #0F172A (15,23,42)
+        xs: "0 1px 2px rgba(15, 23, 42, 0.05)",
+        sm: "0 4px 8px -2px rgba(15, 23, 42, 0.08)",
+        md: "0 12px 24px -8px rgba(15, 23, 42, 0.10)",
+        lg: "0 20px 40px -12px rgba(15, 23, 42, 0.12)",
+        xl: "0 24px 60px -16px rgba(15, 23, 42, 0.15)",
+        card: "0 20px 40px -24px rgba(15,23,42,0.10)",
         'card-hover': "0 24px 70px rgba(15,23,42,0.08)",
         'yellow-glow': "0 35px 80px rgba(255,171,0,.18)",
-    },
-      keyframes: {
-        "fade-in": {
-          "0%": { opacity: "0", transform: "translateY(6px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
+      },
+      transitionDuration: {
+        150: "150ms",
+        200: "200ms",
+        250: "250ms",
+        300: "300ms",
+      },
+      transitionTimingFunction: {
+        "ease-out": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "ease-in": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "ease-in-out": "cubic-bezier(0.4, 0, 0.2, 1)",
+      },
+      zIndex: {
+        dropdown: "100",
+        modal: "200",
+        toast: "300",
+        nav: "50",
+        header: "60",
+      },
+      spacing: {
+        section: {
+          sm: "2.5rem",
+          md: "3.5rem",
+          lg: "4.5rem",
+          xl: "5.5rem",
         },
-        
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+        card: {
+          sm: "1.25rem",
+          md: "1.5rem",
+          lg: "2rem",
         },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+        gap: {
+          sm: "1rem",
+          md: "1.5rem",
+          lg: "2rem",
         },
       },
-      animation: {
-        "fade-in": "fade-in 0.3s ease-out forwards",
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-      },
     },
+    plugins: [require("tailwindcss-animate")],
   },
-  plugins: [require("tailwindcss-animate")],
-}
+};

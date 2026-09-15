@@ -1,11 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  /* Modern CSS Reset & Baseline Rules */
   *,
   *::before,
   *::after {
@@ -15,111 +12,71 @@
   }
 
   html {
+    color-scheme: light;
     scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     tab-size: 4;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    scroll-margin-top: 5rem;
   }
 
   body {
     @apply bg-brand-white text-brand-neutral-900 font-sans antialiased selection:bg-brand-yellow/20 selection:text-brand-neutral-900;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    background-image:
-      radial-gradient(circle at 12% -2%, rgba(255, 197, 74, 0.14), transparent 38%),
-      radial-gradient(circle at 90% 6%, rgba(251, 191, 36, 0.10), transparent 36%),
-      radial-gradient(circle at 50% 40%, rgba(248, 250, 252, 0.55), transparent 60%);
-    background-repeat: no-repeat;
   }
 
-  /* Custom Focus Ring utilizing Brand Yellow */
   :focus-visible {
-    outline: 2px solid #FFAB00;
+    outline: 2px solid theme('colors.brand.yellow.DEFAULT');
     outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
 @layer utilities {
-  /* Pattern 1: Soft Yellow/Green Geometrics */
-  .pattern-geometric-footer {
-    --s: 194px;
-    --c1: #f6edb3;
-    --c2: #acc4a3;
-    --_l: #0000 calc(25% / 3), var(--c1) 0 25%, #0000 0;
-    --_g: conic-gradient(from 120deg at 50% 87.5%, var(--c1) 120deg, #0000 0);
-    background: var(--_g), var(--_g) 0 calc(var(--s) / 2),
-      conic-gradient(from 180deg at 75%, var(--c2) 60deg, #0000 0),
-      conic-gradient(from 60deg at 75% 75%, var(--c1) 0 60deg, #0000 0),
-      linear-gradient(150deg, var(--_l)) 0 calc(var(--s) / 2),
-      conic-gradient(
-        at 25% 25%,
-        #0000 50%,
-        var(--c2) 0 240deg,
-        var(--c1) 0 300deg,
-        var(--c2) 0
-      ),
-      linear-gradient(-150deg, var(--_l)) #55897c;
-    background-size: calc(0.866 * var(--s)) var(--s);
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.brand.yellow.light') transparent;
   }
 
-  /* Connected Node Motif Utility */
-  .soft-yellow-glow {
-    box-shadow: 0 0 24px -4px rgba(255, 171, 0, 0.15);
+  .bg-dots-subtle {
+    @apply relative before:absolute before:inset-0 before:bg-[radial-gradient(circle,currentColor_0.5px,transparent_0.5px)] before:bg-[size:24px_24px] before:opacity-[0.03] before:pointer-events-none;
   }
 
-  .border-subtle {
-    @apply border border-amber-500/15;
+  .bg-dots-navy {
+    @apply relative before:absolute before:inset-0 before:bg-[radial-gradient(circle,theme(colors.brand.neutral.900)_0.5px,transparent_0.5px)] before:bg-[size:24px_24px] before:opacity-[0.03] before:pointer-events-none;
   }
 
-  .glass-card {
-    @apply rounded-3xl border border-amber-500/15 bg-white/80 backdrop-blur-xl shadow-sm transition-all duration-300 hover:border-amber-400/40 hover:shadow-xl;
+  .bg-dots-yellow {
+    @apply relative before:absolute before:inset-0 before:bg-[radial-gradient(circle,theme(colors.brand.yellow.DEFAULT)_0.5px,transparent_0.5px)] before:bg-[size:28px_28px] before:opacity-[0.025] before:pointer-events-none;
   }
 
-  .glass-card-featured {
-    @apply rounded-3xl border border-amber-500/15 bg-white/80 backdrop-blur-xl shadow-sm ring-1 ring-amber-400/30 transition-all duration-300 hover:border-amber-400/40 hover:shadow-xl;
+  .bg-grid-blueprint {
+    @apply relative before:absolute before:inset-0 before:bg-[linear-gradient(to_right,theme(colors.brand.neutral.900/0.03)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.brand.neutral.900/0.03)_1px,transparent_1px)] before:bg-[size:48px_48px] before:pointer-events-none;
   }
 
-  .glass-dark-card {
-    @apply rounded-3xl border border-slate-700/60 bg-slate-800/60 backdrop-blur-md transition-all duration-300 hover:border-amber-500/40;
-  }
-
-  .text-gradient-gold {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-600 font-extrabold;
-  }
-
-  .section-badge {
-    @apply text-[11px] font-bold uppercase tracking-widest;
-  }
-
-  /* Atmospheric radial-mesh canvases */
-  .mesh-canvas {
-    background-color: #FFFFFF;
-    background-image:
-      radial-gradient(circle at 8% -6%, rgba(255, 197, 74, 0.18), transparent 28%),
-      radial-gradient(circle at 94% 4%, rgba(251, 191, 36, 0.15), transparent 30%),
-      radial-gradient(circle at 50% 118%, rgba(253, 230, 138, 0.16), transparent 42%),
-      linear-gradient(180deg, #fffdf6 0%, #f8fafc 55%, #ffffff 100%);
-  }
-
-  .dark-mesh-canvas {
-    background-color: #0F172A;
-    background-image:
-      radial-gradient(circle at 12% 6%, rgba(245, 158, 11, 0.20), transparent 38%),
-      radial-gradient(circle at 90% 10%, rgba(124, 58, 237, 0.16), transparent 44%),
-      radial-gradient(circle at 50% 115%, rgba(245, 158, 11, 0.10), transparent 55%),
-      linear-gradient(180deg, #0F172A 0%, #111C33 60%, #0B1220 100%);
-  }
-
-  .button-primary {
-    @apply inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 bg-[length:200%_auto] text-brand-neutral-900 font-semibold shadow-[0_10px_30px_-10px_rgba(245,158,11,0.6)] transition-all duration-300 hover:bg-right hover:shadow-[0_14px_36px_-10px_rgba(245,158,11,0.75)];
-  }
-
-  .section-surface {
-    @apply rounded-[32px] border border-amber-500/15 bg-white/80 shadow-soft backdrop-blur-xl;
+  .bg-mesh-accent {
+    @apply relative before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_center,theme(colors.brand.yellow.DEFAULT/0.04),transparent_70%)] before:pointer-events-none;
   }
 
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: #fde68a transparent;
+    scrollbar-color: theme('colors.brand.yellow.light') transparent;
   }
 
   .scrollbar-thin::-webkit-scrollbar {
@@ -131,112 +88,29 @@
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: #fde68a;
+    background: theme('colors.brand.yellow.light');
     border-radius: 9999px;
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: #fcd34d;
+    background: theme('colors.brand.yellow.DEFAULT');
   }
 
-  /* Global Card System */
-  .ui-card {
-    @apply rounded-[24px] border border-brand-neutral-200 bg-white shadow-[0_12px_40px_rgba(15,23,42,0.05)] transition-all duration-300;
+  .animate-fade-in-up {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
   }
 
-  .ui-card:hover {
-    @apply -translate-y-1 shadow-[0_24px_70px_rgba(15,23,42,0.08)];
+  .animate-fade-in-up.in-view {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  /* Section Spacing Utilities */
-  .section-spacing {
-    @apply py-16 md:py-[104px];
-  }
-
-  .section-spacing-tight {
-    @apply py-12 md:py-[80px];
-  }
-
-  /* Navigation Height */
-  .navbar-height {
-    @apply h-16 md:h-16;
-  }
-
-  /* Background Decorations */
-  .bg-decoration-left {
-    background-image: radial-gradient(circle at left, rgba(255,171,0,.08), transparent 60%);
-  }
-
-  .bg-decoration-right {
-    background-image: radial-gradient(circle at right, rgba(0,82,204,.04), transparent 65%);
-  }
-
-  .bg-decoration-top {
-    background-image: radial-gradient(circle at top, rgba(255,171,0,.05), transparent 60%);
-  }
-
-  .gradient-cream-white {
-    background: linear-gradient(#FFFDF8, #FFFFFF);
-  }
-
-  .gradient-cream-cream {
-    background: linear-gradient(#FFFDF8, #FFFDF8);
-  }
-
-  .gradient-lightest-cream {
-    background: #FFFDF8;
-  }
-
-  .gradient-neutral-blue {
-    background: #FAFBFC;
-  }
-
-  .gradient-white-cream {
-    background: linear-gradient(#FFFFFF, #FFFDF8);
-  }
-
-  .gradient-cream-white-light {
-    background: linear-gradient(#FFFDF8, #FFFFFF);
-  }
-
-  .gradient-neutral-cream {
-    background: linear-gradient(#FAFBFC, #FFFDF8);
-  }
-
-  .gradient-contact {
-    background: linear-gradient(#FFF8EA, #FFFDF8);
-  }
-
-  .gradient-footer {
-    background: #F8F9FB;
-  }
-
-  /* Contact Section Background */
-  .contact-bg {
-    background-image:
-      linear-gradient(135deg, #FFF8EA, #FFFDF8),
-      radial-gradient(circle at 20% 20%, rgba(255,171,0,.04), transparent 40%),
-      radial-gradient(circle at 80% 80%, rgba(0,82,204,.03), transparent 50%);
-    background-size: cover;
-    background-position: center;
-    position: relative;
-  }
-
-  .contact-bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle at 20% 80%, rgba(0,82,204,.02), transparent 60%),
-                      url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 2L18.5 8L27 15L38 15L38 17L27 17L18.5 24L20 30L24 27L31.5 32.5L30 24L38 17L27 17L18.5 8L20 2Z' stroke='%230052CC' stroke-width='0.5' fill='none' stroke-linecap='round' stroke-linejoin='round' fill-opacity='0.03'/%3E%3C/svg%3E") ;
-    background-size: 40px 40px;
-    opacity: 0.15;
-    z-index: 0;
-  }
-
-  /* Footer with border */
-  .footer-with-border {
-    background: #F8F9FB;
-    border-top: 1px solid #EAECF0;
-  }
-
-  }
+@media print {
+  header, footer, .bg-hero, .bg-contact { display: none !important; }
+  body { background: white !important; color: black !important; }
+  a[href]::after { content: " (" attr(href) ")"; font-size: 10px; color: #64748B; }
+  section { break-inside: avoid; padding: 1rem 0 !important; }
+}

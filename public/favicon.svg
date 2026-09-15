@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Favicon Micro-Variant: Transparent Background for Browser Compatibility -->
+  <g id="favicon">
+    
+    <!-- THE BOOK (High-Contrast, Thick Forms) -->
+    <!-- Heavy Back Cover (Deep Slate) -->
+    <path d="M 10 70 C 35 70 50 82 60 92 C 70 82 85 70 110 70 V 95 C 85 95 70 105 60 115 C 50 105 35 95 10 95 Z" fill="#0F172A"/>
+    <!-- Single Bold Left Page (Bright White) -->
+    <path d="M 14 65 C 35 65 50 77 60 87 V 108 C 50 98 35 86 14 86 Z" fill="#FFFFFF"/>
+    <!-- Single Bold Right Page (Slightly shaded for quick depth) -->
+    <path d="M 106 65 C 85 65 70 77 60 87 V 108 C 70 98 85 86 106 86 Z" fill="#E2E8F0"/>
+    <!-- Thick Center Binding -->
+    <path d="M 60 87 V 115" stroke="#1E293B" stroke-width="4" stroke-linecap="round"/>
+    <!-- Exaggerated Yellow Bookmark -->
+    <path d="M 76 72 V 102 L 68 95 L 60 102 V 80 Z" fill="#FFAB00"/>
+
+    <!-- THE CAP (Hyper-legible Geometry) -->
+    <!-- Simplified Cap Base -->
+    <path d="M 35 35 V 55 C 35 65 85 65 85 55 V 35 Z" fill="#0F172A"/>
+    <!-- Bold Mortarboard -->
+    <path d="M 60 10 L 10 35 L 60 60 L 110 35 Z" fill="#1E293B"/>
+    <!-- Oversized Gold Button -->
+    <circle cx="60" cy="35" r="7" fill="#FFAB00"/>
+    <!-- Thick Tassel Connector -->
+    <path d="M 60 35 Q 92 45 92 70" stroke="#FFAB00" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- Blocky Tassel Fringe -->
+    <path d="M 87 70 L 97 70 L 94 80 L 90 80 Z" fill="#FFAB00"/>
+    
+  </g>
+</svg>

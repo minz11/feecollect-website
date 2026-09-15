@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://feecollect.io/sitemap.xml

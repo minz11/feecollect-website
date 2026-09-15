@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   BookOpen,
@@ -7,224 +7,390 @@ import {
   CheckCircle2,
   ClipboardCheck,
   GraduationCap,
-  Layers,
   ScanLine,
   Users,
   Wallet,
+  Megaphone,
 } from 'lucide-react';
-import { AtmosphericLighting } from '../ui/AtmosphericLighting';
+import { BrowserMockup } from '../ui/BrowserMockup';
+import { SectionHeader } from '../ui/SectionHeader';
+import { Icon } from '../ui/Icon';
+import { Tabs } from '../ui/Tabs';
 
-const tabs = [
+type Module = {
+  id: string;
+  label: string;
+  icon: typeof GraduationCap;
+  description: string;
+  imageSrc?: string;
+  capabilities: string[];
+  stat: string;
+  annotation?: string;
+  workflow?: string[];
+  roles?: string[];
+  related?: string[];
+};
+
+type Category = {
+  id: string;
+  label: string;
+  modules: Module[];
+};
+
+const categories: Category[] = [
   {
-    id: 'admissions',
-    label: 'Admissions',
-    icon: GraduationCap,
-    description: 'Inquiries to enrollment in one connected flow.',
-    capabilities: [
-      'Digital admissions & inquiry management',
-      'Application review with document verification',
-      'Offer letters, waitlists & seat allocation',
-      'Enrollment forms and parent onboarding',
+    id: 'academic',
+    label: 'Academic',
+    modules: [
+      {
+        id: 'admissions',
+        label: 'Admissions',
+        icon: GraduationCap,
+        description: 'Inquiries to enrollment in one connected flow.',
+        imageSrc: undefined,
+        annotation: 'Application → Verification → Approval → Enrollment',
+        workflow: ['Inquiry', 'Application', 'Verification', 'Approval', 'Fee Assignment', 'Enrollment', 'Parent Activation'],
+        roles: ['Administrator', 'Principal', 'Parent'],
+        related: ['Student Information', 'Fee & Finance', 'Communication'],
+        capabilities: [
+          'Digital admissions & inquiry management',
+          'Application review with document verification',
+          'Offer letters, waitlists & seat allocation',
+          'Enrollment forms and parent onboarding',
+        ],
+        stat: '2,412 inquiries → 412 enrolled this cycle',
+      },
+      {
+        id: 'academic-os',
+        label: 'Academic OS',
+        icon: BookOpen,
+        description: 'Courses, timetables & academic structure.',
+        imageSrc: '/erp/curriculum-planner.svg',
+        annotation: 'Course → Timetable → Allocation',
+        workflow: ['Syllabus', 'Course', 'Timetable', 'Room', 'Faculty Allocation'],
+        roles: ['Administrator', 'Teacher', 'Principal'],
+        related: ['Admissions', 'Examinations', 'HR'],
+        capabilities: [
+          'Course & syllabus planning',
+          'Timetable & room scheduling',
+          'Academic calendars & credit mapping',
+          'Faculty workload management',
+        ],
+        stat: '1,280 courses managed across 12 departments',
+      },
+      {
+        id: 'examinations',
+        label: 'Examinations & Grading',
+        icon: ClipboardCheck,
+        description: 'Exams, grading, results & transcripts.',
+        imageSrc: undefined,
+        annotation: 'Schedule → Invigilation → Grading → Report Card',
+        workflow: ['Schedule', 'Seating', 'Invigilation', 'Grading', 'Report Card', 'Transcript'],
+        roles: ['Teacher', 'Administrator', 'Principal'],
+        related: ['Academic OS', 'Communication', 'Reports'],
+        capabilities: [
+          'Exam scheduling & seating plans',
+          'Question paper & invigilation management',
+          'Grading, report cards & transcripts',
+          'Results publishing and analytics',
+        ],
+        stat: '128 exams scheduled • 3.41 average GPA',
+      },
     ],
-    stat: '2,412 inquiries → 412 enrolled this cycle',
   },
   {
-    id: 'academic-os',
-    label: 'Academic OS',
-    icon: BookOpen,
-    description: 'Courses, timetables & academic structure.',
-    capabilities: [
-      'Course & syllabus planning',
-      'Timetable & room scheduling',
-      'Academic calendars & credit mapping',
-      'Faculty workload management',
+    id: 'administration',
+    label: 'Administration',
+    modules: [
+      {
+        id: 'hr-payroll',
+        label: 'HR & Payroll',
+        icon: Users,
+        description: 'Staff, payroll & leave management.',
+        imageSrc: undefined,
+        annotation: 'Onboarding → Attendance → Payroll → Payslip',
+        workflow: ['Onboarding', 'Attendance', 'Leave', 'Payroll', 'Payslip', 'Appraisal'],
+        roles: ['HR', 'Principal', 'Finance'],
+        related: ['Attendance', 'Finance', 'Reports'],
+        capabilities: [
+          'Staff profiles & document management',
+          'Payroll runs & payslip generation',
+          'Leave, attendance & shifts for staff',
+          'Appraisal & role permissions',
+        ],
+        stat: '340 staff onboarded • payroll in 1 day',
+      },
+      {
+        id: 'attendance-rfid',
+        label: 'Attendance & RFID',
+        icon: ScanLine,
+        description: 'Biometric & RFID attendance tracking.',
+        imageSrc: undefined,
+        annotation: 'Check-in → Dashboard → Parent Alert',
+        workflow: ['Capture', 'Dashboard', 'Verification', 'Parent Notification', 'Report'],
+        roles: ['Teacher', 'Administrator', 'Parent'],
+        related: ['Communication', 'Academic OS', 'Mobile App'],
+        capabilities: [
+          'Biometric & RFID check-in capture',
+          'Live attendance dashboards',
+          'Auto-notifications to parents',
+          'Late & leave policy enforcement',
+        ],
+        stat: '96.2% attendance • 4,280 students tracked',
+      },
     ],
-    stat: '1,280 courses managed across 12 departments',
   },
   {
-    id: 'fee-finance',
-    label: 'Fee & Finance',
-    icon: Wallet,
-    description: 'Collections, invoicing, and reconciliation.',
-    capabilities: [
-      'Online fee collection with auto-reconciliation',
-      'Invoices, receipts & payment reminders',
-      'Scholarships, waivers & installment plans',
-      'Audit-ready reports and compliance exports',
+    id: 'finance',
+    label: 'Finance',
+    modules: [
+      {
+        id: 'fee-finance',
+        label: 'Fee & Finance',
+        icon: Wallet,
+        description: 'Collections, invoicing, and reconciliation.',
+        imageSrc: '/erp/fees-invoices.svg',
+        annotation: 'Invoice → Payment → Reconciliation → Receipt',
+        workflow: ['Fee Plan', 'Invoice', 'Payment (UPI/Card)', 'Reconciliation', 'Receipt', 'Scholarship/Waiver'],
+        roles: ['Finance', 'Administrator', 'Parent', 'Management'],
+        related: ['Admissions', 'Transport & Hostel', 'Reports'],
+        capabilities: [
+          'Online fee collection with auto-reconciliation',
+          'Invoices, receipts & payment reminders',
+          'Scholarships, waivers & installment plans',
+          'Audit-ready reports and compliance exports',
+        ],
+        stat: '$1.24M collected this period • 99.98% reconciled',
+      },
     ],
-    stat: '$1.24M collected this period • 99.98% reconciled',
   },
   {
-    id: 'campus-operations',
-    label: 'Campus Operations',
-    icon: Building2,
-    description: 'Facilities, gate access & services.',
-    capabilities: [
-      'Facility booking and maintenance workflows',
-      'Gate access & visitor management',
-      'Cafeteria & service transactions',
-      'Asset and inventory management',
+    id: 'campus',
+    label: 'Campus',
+    modules: [
+      {
+        id: 'campus-operations',
+        label: 'Campus Operations',
+        icon: Building2,
+        description: 'Facilities, gate access & services.',
+        imageSrc: undefined,
+        annotation: 'Booking → Approval → Usage → Billing',
+        workflow: ['Facility Request', 'Approval', 'Booking', 'Gate Entry', 'Usage', 'Asset Log'],
+        roles: ['Administrator', 'Security', 'Finance'],
+        related: ['Attendance', 'Finance', 'HR'],
+        capabilities: [
+          'Facility booking and maintenance workflows',
+          'Gate access & visitor management',
+          'Cafeteria & service transactions',
+          'Asset and inventory management',
+        ],
+        stat: '78 facilities booked • 99% gate accuracy',
+      },
+      {
+        id: 'transport-hostel',
+        label: 'Transport & Hostel',
+        icon: Bus,
+        description: 'Routes, GPS, allotment & occupancy.',
+        imageSrc: '/erp/hostel-allotment.svg',
+        annotation: 'Route → GPS → Allotment → Billing',
+        workflow: ['Route Plan', 'Vehicle Assign', 'GPS Tracking', 'Hostel Allotment', 'Occupancy', 'Mess Billing'],
+        roles: ['Transport Admin', 'Warden', 'Parent', 'Student'],
+        related: ['Admissions', 'Fee & Finance', 'Parent App'],
+        capabilities: [
+          'Hostel allotment & occupancy tracking',
+          'Transport routes, stops & live GPS view',
+          'Driver & vehicle management',
+          'Hostel fees & mess billing',
+        ],
+        stat: '92% hostel occupancy • 48 active routes',
+      },
     ],
-    stat: '78 facilities booked • 99% gate accuracy',
   },
   {
-    id: 'examinations',
-    label: 'Examinations & Grading',
-    icon: ClipboardCheck,
-    description: 'Exams, grading, results & transcripts.',
-    capabilities: [
-      'Exam scheduling & seating plans',
-      'Question paper & invigilation management',
-      'Grading, report cards & transcripts',
-      'Results publishing and analytics',
+    id: 'communication',
+    label: 'Communication',
+    modules: [
+      {
+        id: 'communication',
+        label: 'Communication',
+        icon: Megaphone,
+        description: 'Announcements, messaging & parent connect.',
+        imageSrc: undefined,
+        annotation: 'Draft → Approval → Queue → Delivery Receipt',
+        workflow: ['Draft', 'Approval', 'Queue (WhatsApp/SMS/Push)', 'Dispatch', 'Delivery', 'Read Receipt'],
+        roles: ['Administrator', 'Teacher', 'Parent', 'Management'],
+        related: ['Attendance', 'Examinations', 'Fee & Finance'],
+        capabilities: [
+          'Circulars & announcements with approvals',
+          'Parent-teacher 1:1 messaging',
+          'Push, SMS & WhatsApp queue',
+          'Delivery & read receipts',
+        ],
+        stat: '12k messages / month • 98% delivered',
+      },
     ],
-    stat: '128 exams scheduled • 3.41 average GPA',
-  },
-  {
-    id: 'attendance-rfid',
-    label: 'Attendance & RFID',
-    icon: ScanLine,
-    description: 'Biometric & RFID attendance tracking.',
-    capabilities: [
-      'Biometric & RFID check-in capture',
-      'Live attendance dashboards',
-      'Auto-notifications to parents',
-      'Late & leave policy enforcement',
-    ],
-    stat: '96.2% attendance • 4,280 students tracked',
-  },
-  {
-    id: 'transport-hostel',
-    label: 'Transport & Hostel',
-    icon: Bus,
-    description: 'Routes, GPS, allotment & occupancy.',
-    capabilities: [
-      'Hostel allotment & occupancy tracking',
-      'Transport routes, stops & live GPS view',
-      'Driver & vehicle management',
-      'Hostel fees & mess billing',
-    ],
-    stat: '92% hostel occupancy • 48 active routes',
-  },
-  {
-    id: 'hr-payroll',
-    label: 'HR & Payroll',
-    icon: Users,
-    description: 'Staff, payroll & leave management.',
-    capabilities: [
-      'Staff profiles & document management',
-      'Payroll runs & payslip generation',
-      'Leave, attendance & shifts for staff',
-      'Appraisal & role permissions',
-    ],
-    stat: '340 staff onboarded • payroll in 1 day',
   },
 ];
 
 export const PlatformModules = () => {
-  const [activeTab, setActiveTab] = useState(tabs[0].id);
-  const active = tabs.find((tab) => tab.id === activeTab) ?? tabs[0];
+  const [activeCategory, setActiveCategory] = useState<string>(categories[0].id);
+  const activeCat = useMemo(() => categories.find((c) => c.id === activeCategory) ?? categories[0], [activeCategory]);
+  const [activeModuleId, setActiveModuleId] = useState<string>(activeCat.modules[0].id);
+  const [q, setQ] = useState("");
+  const [debouncedQ, setDebouncedQ] = useState("");
+
+  // Debounce search input (150ms)
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedQ(q), 150);
+    return () => clearTimeout(timer);
+  }, [q]);
+
+  // keep active module in sync when category changes
+  const handleCategory = (catId: string) => {
+    setActiveCategory(catId);
+    const cat = categories.find((c) => c.id === catId)!;
+    setActiveModuleId(cat.modules[0].id);
+    setQ("");
+    setDebouncedQ("");
+  };
+
+  const active = useMemo(
+    () => activeCat.modules.find((m) => m.id === activeModuleId) ?? activeCat.modules[0],
+    [activeCat, activeModuleId]
+  );
+
+  const filteredCatModules = useMemo(() => {
+    if (!debouncedQ.trim()) return activeCat.modules;
+    const needle = debouncedQ.toLowerCase();
+    return activeCat.modules.filter((m) => m.label.toLowerCase().includes(needle) || m.description.toLowerCase().includes(needle));
+  }, [activeCat, debouncedQ]);
 
   return (
-    <section id="modules" className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-center">
-      {/* Atmospheric lighting layers */}
-      <AtmosphericLighting variant="modules" />
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-12">
-        <div className="text-center mx-auto space-y-3 mb-10 max-w-2xl">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm transition-all hover:bg-amber-100/80">
-            <Layers className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-            CORE MODULES
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-neutral-900 tracking-tight">
-            One platform,{' '}
-            <span className="text-gradient-gold">every module.</span>
-          </h2>
-          <p className="text-sm text-slate-600 leading-relaxed">
-            Every campus operation on a single, connected system.
-          </p>
+    <section className="py-section-md">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          badge="Platform modules"
+          title={<>One platform, every module.</>}
+          description="Browse by category — like using the ERP before you book a demo. Select a category, then a module to preview its live screenshot."
+        />
+
+        <div className="mt-3 flex justify-center">
+          <div className="relative w-full max-w-md">
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Search modules (e.g. Fees, Attendance, Hostel)"
+              aria-label="Search modules"
+              className="w-full rounded-full border border-brand-neutral-200 bg-white px-5 py-2.5 pr-10 text-sm placeholder:text-brand-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow/20"
+            />
+            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-brand-neutral-400 text-sm">⌕</span>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          {/* Left: vertical pill navigation */}
-          <div className="md:col-span-4">
-            <div className="relative">
-              <div className="max-h-[380px] overflow-y-auto pr-2 space-y-2 overscroll-contain scrollbar-thin scrollbar-thumb-amber-200">
-                {tabs.map((tab) => {
-                  const Icon = tab.icon;
-                  const isActive = tab.id === activeTab;
-                  return (
-                    <button
-                      key={tab.id}
-                      type="button"
-                      onClick={() => setActiveTab(tab.id)}
-                      aria-pressed={isActive}
-                      className={`group flex w-full items-center gap-3 rounded-xl border px-5 py-4 text-left transition-all duration-200 cursor-pointer ${
-                        isActive
-                          ? 'border-l-4 border-amber-500 bg-amber-50/60 border-gray-200'
-                          : 'border border-gray-200 bg-white text-slate-600 hover:bg-amber-50/40 hover:border-amber-400/60 hover:text-slate-800'
-                      }`}
-                    >
-                      <span
-                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-200 ${
-                          isActive
-                            ? 'bg-gradient-to-br from-amber-500 to-yellow-400 text-white shadow-[0_8px_16px_-6px_rgba(245,158,11,0.7)]'
-                            : 'bg-slate-100 text-slate-600 group-hover:bg-amber-50 group-hover:text-amber-600'
-                        }`}
-                      >
-                        <Icon className="h-5 w-5" />
-                      </span>
-                      <span className="min-w-0">
-                        <span className={`block text-sm font-semibold ${isActive ? 'text-slate-900' : 'text-slate-800'}`}>
-                          {tab.label}
-                        </span>
-                        <span className="block text-xs leading-5 text-slate-500">{tab.description}</span>
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-white to-transparent" />
-            </div>
-          </div>
-
-          {/* Right: single preview card */}
-          <div className="md:col-span-8">
-            <div className="bg-white border border-brand-neutral-200 rounded-2xl p-8 shadow-soft max-h-[500px] overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-400 text-white shadow-[0_10px_20px_-8px_rgba(245,158,11,0.8)]">
-                      <active.icon className="h-6 w-6" />
-                    </span>
-                    <div>
-                      <p className="section-badge text-slate-400">Module preview</p>
-                      <h3 className="mt-1 text-2xl font-bold text-slate-900">{active.label}</h3>
+        <div className="mt-4">
+          <Tabs
+            variant="pills"
+            defaultIndex={categories.findIndex((c) => c.id === activeCategory)}
+            onChange={(idx) => handleCategory(categories[idx].id)}
+            items={categories.map((cat) => ({
+              label: `${cat.label} (${cat.modules.length})`,
+              content: (
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start pt-2">
+                  <div className="md:col-span-4">
+                    <div className="space-y-1.5 max-h-[60vh] overflow-y-auto pr-2 scrollbar-thin pt-1">
+                      {filteredCatModules.length === 0 && <p className="text-sm text-brand-neutral-500 px-2 py-4">No modules match “{debouncedQ}”.</p>}
+                      {filteredCatModules.map((m) => {
+                        const LucideIcon = m.icon;
+                        const isActive = cat.id === activeCategory && m.id === activeModuleId;
+                        return (
+                          <button
+                            key={m.id}
+                            onClick={() => {
+                              if (cat.id !== activeCategory) handleCategory(cat.id);
+                              setActiveModuleId(m.id);
+                            }}
+                            aria-pressed={isActive}
+                            className={`flex w-full items-center gap-2.5 rounded-xl border px-2.5 py-2 text-left transition-[color,box-shadow,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow ${
+                              isActive
+                                ? 'bg-brand-neutral-900 text-white border-brand-neutral-900 shadow-sm scale-[1.01]'
+                                : 'bg-white border-brand-neutral-200 hover:bg-brand-neutral-50 hover:shadow-sm hover:-translate-x-1'
+                            }`}
+                          >
+                            <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border ${isActive ? 'bg-brand-neutral-800 text-white border-brand-neutral-700' : 'bg-brand-neutral-50 text-brand-neutral-700 border-brand-neutral-200'}`}>
+                              <Icon size="sm"><LucideIcon className="h-4 w-4" aria-hidden="true" /></Icon>
+                            </span>
+                            <span className="min-w-0">
+                              <span className="block text-sm font-semibold text-brand-neutral-900">{m.label}</span>
+                              <span className="block text-xs text-brand-neutral-500">{m.description}</span>
+                            </span>
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
-
-                  <ul className="mt-6 space-y-3.5">
-                    {active.capabilities.map((item) => (
-                      <li key={item} className="flex items-start gap-3">
-                        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-amber-500" />
-                        <span className="text-sm leading-6 text-slate-700">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-7 flex items-center gap-2.5 rounded-xl bg-amber-50/70 px-5 py-3.5 ring-1 ring-amber-500/20">
-                    <span className="h-2 w-2 shrink-0 rounded-full bg-amber-500 animate-pulse" />
-                    <p className="text-sm font-semibold text-slate-800">{active.stat}</p>
+                  <div className="md:col-span-8 space-y-2 md:sticky md:top-16 md:self-start">
+                    <BrowserMockup src={active.imageSrc} label={active.label} alt={`${active.label} screenshot`} kpi={active.stat} annotation={active.annotation} />
+                    <div className="rounded-2xl border border-brand-neutral-200 bg-white p-5">
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          key={active.id}
+                          initial={{ opacity: 0, y: 8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -8 }}
+                          transition={{ duration: 0.25 }}
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <Icon><active.icon className="h-5 w-5" aria-hidden="true" /></Icon>
+                            <h3 className="text-base font-semibold text-brand-neutral-900">{active.label}</h3>
+                          </div>
+                          <ul className="mt-3 space-y-2">
+                            {active.capabilities.map((item) => (
+                              <li key={item} className="flex items-start gap-2.5">
+                                <Icon size="sm"><CheckCircle2 className="h-4 w-4 shrink-0" aria-hidden="true" /></Icon>
+                                <span className="text-sm leading-6 text-brand-neutral-700">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                          {active.workflow && (
+<div className="mt-3">
+                              <p className="text-xs font-bold uppercase tracking-widest text-brand-neutral-500">Workflow</p>
+                              <div className="mt-2 flex flex-wrap gap-1.5">
+                                {active.workflow.map((step, i) => (
+                                  <span key={step} className="inline-flex items-center gap-1.5">
+                                    <span className="rounded-full border border-brand-neutral-200 bg-brand-neutral-50 px-2 py-0.75 text-xs font-medium text-brand-neutral-700">{step}</span>
+                                    {i < (active.workflow!.length - 1) && <span className="text-brand-neutral-300" aria-hidden>→</span>}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {active.roles && (
+                            <div className="mt-3 flex flex-wrap gap-1.5">
+                              {active.roles.map((r) => (
+                                <span key={r} className="rounded-full bg-brand-yellow-light border border-brand-yellow/20 px-2.5 py-1 text-xs font-semibold text-brand-neutral-700">{r}</span>
+                              ))}
+                            </div>
+                          )}
+                          {active.related && (
+                            <div className="mt-2">
+                              <p className="text-xs font-semibold text-brand-neutral-500">Connected modules: <span className="font-normal text-brand-neutral-700">{active.related.join(" • ")}</span></p>
+                            </div>
+                          )}
+                          <div className="mt-3 flex items-center gap-2 rounded-lg bg-brand-neutral-50 px-4 py-2.5 border border-brand-neutral-200">
+                            <span className="h-2 w-2 rounded-full bg-brand-yellow" aria-hidden="true" />
+                            <p className="text-xs font-semibold text-brand-neutral-700">{active.stat}</p>
+                          </div>
+                        </motion.div>
+                      </AnimatePresence>
+                    </div>
+                    <div className="flex justify-end">
+                      <a href="#showcase" className="text-sm font-semibold text-brand-neutral-900 underline decoration-brand-neutral-300 underline-offset-4 hover:decoration-brand-yellow">View in product walkthrough →</a>
+                    </div>
                   </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
+                </div>
+              ),
+            }))}
+          />
         </div>
       </div>
     </section>

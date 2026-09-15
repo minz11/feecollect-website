@@ -1,109 +1,104 @@
-import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { MonitorPlay } from 'lucide-react';
-import { AtmosphericLighting } from '../ui/AtmosphericLighting';
+import { SectionHeader } from '../ui/SectionHeader';
+import { BrowserMockup } from '../ui/BrowserMockup';
+import { Tabs } from '../ui/Tabs';
+import { Button } from '../ui/Button';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
+import { cn } from '../../lib/utils';
 
 const mockups = [
   {
-    src: '/showcase-1.jpg',
+    src: '/erp/admin-dashboard.svg',
     label: 'Admin Dashboard',
-    tab: '1. Admin Dashboard',
+    tab: 'Admin Dashboard',
     note: 'Command center for every campus function.',
+    annotation: 'Unified view — all departments at a glance',
+    kpi: 'Single data model • Real-time sync',
   },
   {
-    src: '/showcase-2.jpg',
+    src: '/erp/fees-invoices.svg',
     label: 'Fee Management',
-    tab: '2. Fee Management',
-    note: 'Collections, invoicing, and reconciliation.',
+    tab: 'Fee Management',
+    note: 'Collections, invoicing, and reconciliation — auto-reconciled in < 200ms.',
+    annotation: 'Auto-reconciliation live',
+    kpi: '99.98% reconciled',
   },
   {
-    src: '/showcase-3.jpg',
+    src: '/erp/curriculum-planner.svg',
     label: 'Academics & Exams',
-    tab: '3. Academics & Exams',
-    note: 'Grading, schedules, and exam operations.',
+    tab: 'Academics & Exams',
+    note: 'Grading, schedules, and exam operations with analytics.',
+    annotation: 'Schedule → Grading → Report Card',
+    kpi: '1,280 courses • 12 departments',
   },
   {
-    src: '/showcase-4.jpg',
+    src: '/erp/hostel-allotment.svg',
     label: 'Hostel & Operations',
-    tab: '4. Hostel & Operations',
-    note: 'Allotment, transport, and facilities.',
+    tab: 'Hostel & Operations',
+    note: 'Allotment, transport, and facilities with GPS & occupancy.',
+    annotation: 'Live GPS • 92% occupancy',
+    kpi: '48 active routes',
+  },
+  {
+    src: undefined as string | undefined,
+    label: 'Library',
+    tab: 'Library',
+    note: 'Catalog, circulation and inventory — add screenshot to /public/screenshots/showcase/library.webp',
+    annotation: 'Catalog → Issue → Return → Inventory',
+    kpi: 'Asset-ready — capture pending',
+  },
+  {
+    src: undefined as string | undefined,
+    label: 'HRMS',
+    tab: 'HRMS',
+    note: 'Staff profiles, payroll and leave — add screenshot to /public/screenshots/showcase/hrms.webp',
+    annotation: 'Onboarding → Payroll → Leave',
+    kpi: 'Asset-ready — capture pending',
   },
 ];
 
 export const ProductShowcase = () => {
-  const [active, setActive] = useState(0);
-  const current = mockups[active];
+  const { ref, isInView } = useIntersectionObserver({ triggerOnce: true });
 
   return (
-    <section id="showcase" className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-center py-12 md:py-16">
-      {/* Atmospheric lighting layers */}
-      <AtmosphericLighting variant="showcase" />
+    <section className="py-section-sm md:py-section-md">
+      <div className="mx-auto max-w-[1400px] px-6">
+        <SectionHeader
+          badge="Inside FeeCollect"
+          title={<>See how FeeCollect transforms campus operations.</>}
+          description="A guided tour of real screens your teams use every day — annotated with what it is, why it matters, and the business outcome."
+        />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-10">
-        <div className="text-center max-w-2xl mx-auto space-y-4">
-<span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-neutral-50 border border-brand-neutral-200/80 text-brand-yellow text-xs font-bold tracking-widest uppercase mb-4 shadow-sm transition-all hover:bg-brand-neutral-100/80">
-              <MonitorPlay className="w-3.5 h-3.5 text-brand-yellow shrink-0" />
-              PLATFORM IN ACTION
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-brand-neutral-900 tracking-tight">
-            See how FeeCollect{' '}
-            <span className="text-gradient-gold">transforms campus operations.</span>
-          </h2>
-          <p className="text-base text-brand-neutral-600 leading-relaxed">
-            A tour of the screens your teams will use every day — from the command center to the analytics suite.
-          </p>
-        </div>
-
-        {/* Main Showcase Display */}
-        <div className="relative w-full aspect-[16/9] max-h-[550px] bg-brand-neutral-900/5 rounded-2xl border-2 border-brand-neutral-200/80 shadow-soft overflow-hidden flex items-center justify-center">
-          <AnimatePresence mode="wait">
-            <motion.img
-              id="active-showcase-img"
-              key={current.src}
-              src={current.src}
-              alt={current.label}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="w-full h-full object-cover"
+        <div className="mt-4">
+          <div ref={ref} className={cn('animate-fade-in-up', isInView ? 'in-view' : '')}>
+            <Tabs
+              variant="pills"
+              items={mockups.map((m, idx) => ({
+                label: m.tab,
+                content: (
+                  <div>
+                    <BrowserMockup src={m.src} label={m.label} alt={m.label} annotation={m.annotation} kpi={m.kpi} isFirstTab={idx === 0} className="shadow-[0_20px_40px_-12px_rgba(15,23,42,0.15)]" />
+                    <p className="mt-3 text-center text-sm leading-relaxed text-brand-neutral-600 max-w-2xl mx-auto">{m.note}</p>
+                  </div>
+                ),
+              }))}
             />
-          </AnimatePresence>
+          </div>
+          <div className="mt-3 flex flex-wrap gap-2 justify-center">
+            {['Admissions', 'Finance', 'Hostel', 'Transport', 'Library', 'HRMS'].map((k) => (
+              <span key={k} className="rounded-full border border-brand-neutral-200 bg-white px-3 py-1 text-xs font-medium text-brand-neutral-600">{k}</span>
+            ))}
+            <span className="text-xs text-brand-neutral-500 self-center">— highlighted in tour above</span>
+          </div>
 
-          {/* Bottom overlay caption */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent p-5">
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <p className="text-sm font-bold text-white">{current.label}</p>
-                <p className="mt-0.5 text-xs text-slate-200/90">{current.note}</p>
-              </div>
-              <span className="shrink-0 rounded-full bg-white/15 px-3 py-1 text-xs font-bold text-white backdrop-blur-xl ring-1 ring-white/20">
-                {active + 1} / {mockups.length}
-              </span>
+          <div className="mt-4 rounded-2xl border border-brand-neutral-200 bg-brand-neutral-50 p-5 md:p-6 text-center">
+            <div className="mx-auto max-w-3xl space-y-3">
+              <p className="text-xs font-bold uppercase tracking-widest text-brand-neutral-500">See it on mobile too</p>
+              <p className="text-sm text-brand-neutral-600">Every screen adapts to the Parent, Teacher, and Student apps — same data, native experience.</p>
+              <Button variant="primary" className="rounded-xl px-6 py-3" onClick={() => document.querySelector('#mobile')?.scrollIntoView({ behavior: 'smooth' })}>
+                Explore Mobile Apps
+              </Button>
             </div>
           </div>
-        </div>
-
-        {/* Thumbnail Navigation / Switcher Pills */}
-        <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
-          {mockups.map((mockup, index) => {
-            const isActive = index === active;
-            return (
-              <button
-                key={mockup.src}
-                type="button"
-                onClick={() => setActive(index)}
-                aria-pressed={isActive}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
-                  isActive
-                    ? 'bg-brand-yellow text-brand-neutral-900 shadow-md'
-                    : 'bg-brand-neutral-100 text-brand-neutral-700 border border-brand-neutral-200 hover:border-brand-yellow/50'
-                }`}
-              >
-                {mockup.tab}
-              </button>
-            );
-          })}
         </div>
       </div>
     </section>

@@ -2,14 +2,79 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <meta name="theme-color" content="#FFAB00" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="/erp/admin-dashboard.svg" fetchpriority="high" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#FFFFFF" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="FeeCollect.io - The connected operating system for enterprise educational institutions. One Platform. Every Institution." />
-    <title>FeeCollect.io — One Platform. Every Institution.</title>
+    <!-- Analytics placeholder: replace with GA4/Plausible when ready -->
+    <!-- <script defer data-domain="feecollect.io" src="https://plausible.io/js/script.js"></script> -->
+    <meta name="description" content="FeeCollect is an integrated cloud ERP for schools, colleges and universities in India — admissions, academics, finance, HR, hostel, transport and communication on one connected platform with parent, teacher and student mobile apps." />
+    <meta name="keywords" content="school ERP India, college ERP, university ERP, FeeCollect, education ERP, campus management, fee management, admissions, hostel management" />
+    <meta name="author" content="FeeCollect" />
+    <link rel="canonical" href="https://feecollect.io/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://feecollect.io/" />
+    <meta property="og:title" content="FeeCollect — One Platform. Every Institution." />
+    <meta property="og:description" content="An integrated cloud ERP for schools, colleges and universities. One connected platform for admissions, academics, finance, HR and campus operations." />
+    <meta property="og:image" content="https://feecollect.io/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="FeeCollect" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="FeeCollect — One Platform. Every Institution." />
+    <meta name="twitter:description" content="The connected operating system for educational institutions in India." />
+    <meta name="twitter:image" content="https://feecollect.io/og-image.png" />
+    <title>FeeCollect — One Platform. Every Institution. | School & College ERP India</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "FeeCollect",
+        "url": "https://feecollect.io",
+        "logo": "https://feecollect.io/logo.svg",
+        "description": "Integrated cloud ERP platform for schools, colleges and universities. One connected operating system for admissions, academics, finance, HR, hostel, transport and communication.",
+        "sameAs": [
+          "https://www.linkedin.com/company/feecollect",
+          "https://twitter.com/feecollect"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "FeeCollect",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web, iOS, Android",
+        "description": "Integrated cloud ERP for schools, colleges and universities — admissions, academics, finance, HR, campus operations and communication on one connected platform.",
+        "url": "https://feecollect.io",
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "INR",
+          "lowPrice": "Contact for pricing"
+        },
+        "provider": {
+          "@type": "Organization",
+          "name": "FeeCollect"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <div style="padding:2rem;text-align:center;font-family:sans-serif">
+        <h1>FeeCollect — One Platform. Every Institution.</h1>
+        <p>Please enable JavaScript to use the FeeCollect website.</p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
